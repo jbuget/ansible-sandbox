@@ -1,0 +1,6 @@
+- name: include install
+  include: install.yml
+
+- name: include test
+  include: test.yml
+  tags: test

@@ -1,0 +1,9 @@
+- hosts: db-servers
+  roles:
+    - role: pgsql
+      tags: pgsql
+
+- hosts: all
+  roles:
+    - role: pix_cli
+      tags: pix_cli

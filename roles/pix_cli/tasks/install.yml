@@ -1,0 +1,22 @@
+- name: get current Pix script status
+  stat:
+    path: "{{ pix_cli_path }}"
+  register: pix_result
+
+- name: debug
+  debug:
+    var: pix_result
+
+- name: ensure old symlink is absent
+  file:
+    path: "{{ pix_cli_path }}"
+    state: absent
+  when: pix_result.stat.exists and pix_result.stat.islnk
+  become: true
+
+- name: ensure Pix script is installed
+  template:
+    src: pix.sh.j2
+    dest: "{{ pix_cli_path }}"
+    mode: 0755
+  become: true

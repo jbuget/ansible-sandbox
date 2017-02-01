@@ -1,0 +1,12 @@
+- name: ensure postgres package is installed
+  package:
+    name: postgresql
+    state: present
+  become: true
+
+- name: ensure postgres service is started
+  service:
+    name: postgresql
+    state: started
+    enabled: true
+  become: true
